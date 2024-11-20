@@ -1,0 +1,21 @@
+- main
+SET a 5
+SET b 1
+PRINT a
+ADD a b
+PRINT a
+SET b a
+ADD b b
+ADD b a
+PRINT b
+PRINTNL "Hello "
+PRINT "World!"
+SET c a
+ADD c -10000
+IF c
+GOTO 16
+GOTO 3
+GOTO_ROUTINE "alt"
+
+- alt
+PRINT "Done!"
