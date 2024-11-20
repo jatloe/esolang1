@@ -1,3 +1,5 @@
+NUMVARS = 3
+
 - main
 SET a 0
 ADD a 1

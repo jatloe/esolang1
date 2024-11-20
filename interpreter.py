@@ -1,6 +1,22 @@
+ALLOWED_VARIABLES = {*"abc"}
+variableValues = {x:0 for x in ALLOWED_VARIABLES}
+
 def compile(lines):
     lines = lines.split("\n")
     lines = [line for line in lines if line]
+
+    if not lines[0].startswith("NUMVARS"):
+        numVars = 3
+    else:
+        try:
+            numVars = int(lines[0].replace(" ","").split("=")[1])
+        except: raise Exception(f"Invalid first line! It should be NUMVARS = 5, for example. If not specified, it will be 3.")
+        lines = lines[1:]
+    if numVars not in [*range(27)]: raise Exception(f"Invalid number of variables! It must be in [0,26].")
+
+    global ALLOWED_VARIABLES,variableValues
+    ALLOWED_VARIABLES = {*("abcdefghijklmnopqrstuvwxyz"[:numVars])}
+    variableValues = {x:0 for x in ALLOWED_VARIABLES}
 
     routineDict = {}
     currRoutine = ""
@@ -14,8 +30,6 @@ def compile(lines):
     
     return routineDict
 
-ALLOWED_VARIABLES = {*"abc"}
-variableValues = {x:0 for x in ALLOWED_VARIABLES}
 def parseObjectNoCheck(s):
     if s in ALLOWED_VARIABLES:
         return variableValues[s]
