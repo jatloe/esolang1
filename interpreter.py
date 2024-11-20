@@ -99,6 +99,8 @@ def interpret(routineDict):
         
         # print(line,variableValues)
 
-theFile = open("example.txt","r").read()
+import sys
+args = sys.argv[1:]
+theFile = open((args[0] if args else "example") + ".txt","r").read()
 routineDict = compile(theFile)
 interpret(routineDict)
