@@ -1,0 +1,25 @@
+- main
+SET a 0
+ADD a 1
+PRINTNL a
+PRINTNL " "
+SET b a
+ADD b -3
+IF b
+GOTO 5
+ADD b 1
+IF b
+PRINTNL "Fizz"
+SET b a
+ADD b -5
+IF b
+GOTO 12
+ADD b 1
+IF b
+PRINTNL "Buzz"
+PRINT ""
+SET b a
+ADD b -99
+IF b
+GOTO 24
+GOTO 1
