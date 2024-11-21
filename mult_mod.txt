@@ -1,29 +1,42 @@
 NUMVARS = 26
 
 - main
-SET x 1234908235673894067098523784192307593768908095278609183
-SET y 27895673458793
-GOTO_ROUTINE "mod"
+SET x 234907832589698023468903425234907832589698023468903425
+SET y 2307985789023457890234589074235
+GOTO_ROUTINE "mult"
 PRINT x
 PRINT y
 PRINT z
 
-- negate # Computes -x and puts it in y, assumes x is positive, uses aux o,p,q,r,s,t
-SET y 0
-SET t x
-SET o -1
-SET q t
-ADD q o
-ADD q o
-IF q
-GOTO 13
-ADD t o
-ADD y o
+- mult # Computes x*y and puts it in z, ASSUMES Y POSITIVE, uses aux o-t
+SET z 0
+SET o x # archive
+SET p y # archive
+SET q y # currY
+SET r -1 # mult
+SET s x # curr
+SET t q
+ADD t r
+ADD t r
 IF t
-GOTO 2
-GOTO 999
-ADD o o
-GOTO 3
+GOTO 18 # Make it higher
+ADD q r
+ADD z s
+IF q
+GOTO 4 # Go back and subtract more
+SET x o
+SET y p
+GOTO 999 # Done
+ADD r r
+ADD s s
+GOTO 6
+
+- negate # Computes -x and puts it in y, assumes x is positive, uses aux o,p,q,r,s,t,z
+SET y x
+SET x -1
+GOTO_ROUTINE "mult"
+SET x y
+SET y z
 
 - subtract # Computes x-y and puts it in z, uses aux o,p,q,r,s,t
 SET o x
@@ -33,7 +46,6 @@ ADD y x
 SET z y
 SET y x
 SET x o
-
 
 - mod # Computes x%y and puts it in z, uses auxiliary variables o,p,q,r,s,t,u,v,w
 # The idea is to let o=y then double o while o<x, then subtract o from x
@@ -66,3 +78,11 @@ ADD z x
 ADD z -1
 SET x s
 SET y t
+
+
+
+
+
+
+
+
