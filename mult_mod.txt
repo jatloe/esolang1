@@ -1,0 +1,28 @@
+NUMVARS = 26
+
+- main
+SET x 8421830942389457230672867253769802357902345
+GOTO_ROUTINE "negate"
+PRINT y
+
+
+- negate # Computes -x and puts it in y, assumes x is positive, uses aux o,p,q,r,s,t
+SET t x
+SET o -1
+SET q t
+ADD q o
+ADD q o
+IF q
+GOTO 12
+ADD t o
+ADD y o
+IF t
+GOTO 1
+GOTO 999
+ADD o o
+GOTO 2
+
+- mod # Computes x%y and puts it in z, uses auxiliary variables o,p,q,r,s,t
+# The idea is to let o=y then double o while o<x, then subtract o from x
+SET o y
+SET p z

@@ -3,6 +3,7 @@ variableValues = {x:0 for x in ALLOWED_VARIABLES}
 
 def compile(lines):
     lines = lines.split("\n")
+    lines = [line[:line.index("#") if "#" in line else None].strip() for line in lines]
     lines = [line for line in lines if line]
 
     if not lines[0].startswith("NUMVARS"):
@@ -66,7 +67,7 @@ def interpret(routineDict):
 
         line = routineDict[currRoutine][lineNum]
         
-        if lineNum + 1 < len(routineDict[currRoutine]): stack += [(currRoutine,lineNum + 1)]
+        stack += [(currRoutine,lineNum + 1)]
         
         if line.startswith("GOTO_ROUTINE"):
             r = parseObject(line[13:])

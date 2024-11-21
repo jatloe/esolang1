@@ -9,7 +9,8 @@ ADD b b
 ADD b a
 PRINT b
 PRINTNL "Hello "
-PRINT "World!"
+PRINT "World!" # This is a comment
+# This is another comment
 SET c a
 ADD c -10000
 IF c
