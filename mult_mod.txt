@@ -1,28 +1,68 @@
 NUMVARS = 26
 
 - main
-SET x 8421830942389457230672867253769802357902345
-GOTO_ROUTINE "negate"
+SET x 1234908235673894067098523784192307593768908095278609183
+SET y 27895673458793
+GOTO_ROUTINE "mod"
+PRINT x
 PRINT y
-
+PRINT z
 
 - negate # Computes -x and puts it in y, assumes x is positive, uses aux o,p,q,r,s,t
+SET y 0
 SET t x
 SET o -1
 SET q t
 ADD q o
 ADD q o
 IF q
-GOTO 12
+GOTO 13
 ADD t o
 ADD y o
 IF t
-GOTO 1
+GOTO 2
 GOTO 999
 ADD o o
-GOTO 2
+GOTO 3
 
-- mod # Computes x%y and puts it in z, uses auxiliary variables o,p,q,r,s,t
+- subtract # Computes x-y and puts it in z, uses aux o,p,q,r,s,t
+SET o x
+SET x y
+GOTO_ROUTINE "negate"
+ADD y x
+SET z y
+SET y x
+SET x o
+
+
+- mod # Computes x%y and puts it in z, uses auxiliary variables o,p,q,r,s,t,u,v,w
 # The idea is to let o=y then double o while o<x, then subtract o from x
-SET o y
-SET p z
+SET u x # Won't change
+SET v y # Won't change
+SET x y
+GOTO_ROUTINE "negate"
+SET s u # Not changing
+SET r u # Will change
+SET t v # Not changing
+SET p v # Will change
+SET w y
+SET o w # -y
+SET q r
+ADD q o
+ADD q o
+IF q
+GOTO 19
+ADD r o
+IF r
+GOTO 9
+GOTO 21
+ADD o o
+GOTO 10
+SET z r
+ADD z 1
+IF z
+GOTO 26
+ADD z x
+ADD z -1
+SET x s
+SET y t
