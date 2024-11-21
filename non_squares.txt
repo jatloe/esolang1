@@ -1,0 +1,23 @@
+NUMVARS = 3
+
+
+
+
+
+
+
+- main
+SET a 0
+SET b 1
+SET c 1
+ADD a 1
+ADD c -1
+IF c
+GOTO 12
+SET c b
+ADD c b
+ADD c 1
+ADD b 1
+GOTO 3
+PRINT a
+GOTO 3
